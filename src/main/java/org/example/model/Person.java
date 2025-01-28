@@ -57,6 +57,6 @@ public class Person {
     }
 
     public String getSummary() {
-        return "Person id: " + id + ", firstName: '" + firstName + "', lastName: '" + lastName + "', email: " + email;
+        return "Person id: " + getId() + ", firstName: '" + getFirstName() + "', lastName: '" + getLastName() + "', email: " + getEmail();
     }
 }
