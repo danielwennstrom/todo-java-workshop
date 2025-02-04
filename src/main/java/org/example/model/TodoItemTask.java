@@ -1,5 +1,7 @@
 package org.example.model;
 
+import java.util.Objects;
+
 public class TodoItemTask {
     private int id;
     private boolean assigned;
@@ -10,7 +12,7 @@ public class TodoItemTask {
         this.id = id;
         setAssigned(assignee != null);
         if (todoItem == null)
-            throw new IllegalArgumentException("Todo item cannot be null");
+            throw new IllegalArgumentException("Todo item can't be null.");
         this.todoItem = todoItem;
         this.assignee = assignee;
     }
@@ -37,7 +39,7 @@ public class TodoItemTask {
 
     public void setTodoItem(TodoItem todoItem) {
         if (todoItem == null)
-            throw new IllegalArgumentException("Todo item cannot be null");
+            throw new IllegalArgumentException("Todo item can't be null.");
         this.todoItem = todoItem;
     }
 
@@ -49,8 +51,24 @@ public class TodoItemTask {
         this.assignee = assignee;
     }
 
-    public String getSummary() {
-        return String.format("ID: %d, isAssigned: %s, taskItem: %s, Assignee: %s %s",
-                id, assigned, todoItem.getTitle(), assignee.getFirstName(), assignee.getLastName());
+    @Override
+    public String toString() {
+        return "TodoItemTask{" +
+                "id=" + id +
+                ", assigned=" + assigned +
+                ", todoItem=" + todoItem +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TodoItemTask that = (TodoItemTask) o;
+        return getId() == that.getId() && isAssigned() == that.isAssigned() && Objects.equals(getTodoItem(), that.getTodoItem());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), isAssigned(), getTodoItem());
     }
 }

@@ -1,6 +1,7 @@
 package org.example.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class TodoItem {
     private int id;
@@ -12,7 +13,7 @@ public class TodoItem {
 
     public TodoItem(int id, String title, String taskDescription, LocalDate deadLine, boolean done, Person creator) {
         if (title == null || title.isEmpty() || deadLine == null)
-            throw new IllegalArgumentException("Todo item must have a non-empty title and a valid date");
+            throw new IllegalArgumentException("Todo item must have a non-empty title and a valid date.");
 
         this.id = id;
         this.title = title;
@@ -36,7 +37,7 @@ public class TodoItem {
 
     public void setTitle(String title) {
         if (title == null || title.isEmpty())
-            throw new IllegalArgumentException("Title cannot be null or empty");
+            throw new IllegalArgumentException("Title can't be null or empty.");
 
         this.title = title;
     }
@@ -55,7 +56,7 @@ public class TodoItem {
 
     public void setDeadLine(LocalDate deadLine) {
         if (deadLine == null)
-            throw new IllegalArgumentException("Deadline cannot be null");
+            throw new IllegalArgumentException("Deadline can't be null.");
 
         this.deadLine = deadLine;
     }
@@ -80,8 +81,26 @@ public class TodoItem {
         return this.deadLine == null || LocalDate.now().isAfter(this.deadLine);
     }
 
-    public String getSummary() {
-        return String.format("ID: %d, Title: %s, Task Description: %s, Deadline: %s, Done: %b, Creator: %s %s",
-                id, title, taskDescription, deadLine, done, creator.getFirstName(), creator.getLastName());
+    @Override
+    public String toString() {
+        return "TodoItem{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", deadLine=" + deadLine +
+                ", done=" + done +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TodoItem todoItem = (TodoItem) o;
+        return getId() == todoItem.getId() && isDone() == todoItem.isDone() && Objects.equals(getTitle(), todoItem.getTitle()) && Objects.equals(getTaskDescription(), todoItem.getTaskDescription()) && Objects.equals(getDeadLine(), todoItem.getDeadLine());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle(), getTaskDescription(), getDeadLine(), isDone());
     }
 }
