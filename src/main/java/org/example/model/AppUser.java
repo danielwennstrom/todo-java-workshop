@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.example.util.AppRole;
+
 import java.util.Objects;
 
 public class AppUser {
