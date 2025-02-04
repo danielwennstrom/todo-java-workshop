@@ -5,12 +5,22 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.example.model.Person;
 import org.example.model.TodoItem;
 import org.example.model.TodoItemTask;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
 class MainTest {
+    private Person person;
+    private LocalDate today;
+
+    @BeforeEach
+    public void setUp() {
+         person = new Person(1, "Sven", "Svensson", "test@domain.com");
+         today = LocalDate.now();
+    }
+
     @Test
     @DisplayName("Test Person")
     void testPerson() {
@@ -23,8 +33,6 @@ class MainTest {
     @Test
     @DisplayName("Test TodoItem")
     void testTodoItem() {
-        Person person = new Person(1, "Sven", "Svensson", "test@domain.com");
-        LocalDate today = LocalDate.now();
         LocalDate yesterday = today.minusDays(1);
         TodoItem todoItem = new TodoItem(1, "Buy groceries",
                 "Go to the store and buy groceries", yesterday, false, person);
@@ -40,9 +48,8 @@ class MainTest {
     @Test
     @DisplayName("Test TodoItemTask")
     void testTodoItemTask() {
-        Person person = new Person(1, "Sven", "Svensson", "test@domain.com");
         TodoItem todoItem = new TodoItem(1, "Buy groceries",
-                "Go to the store and buy groceries", LocalDate.now(), false, person);
+                "Go to the store and buy groceries", today, false, person);
         TodoItemTask task = new TodoItemTask(1, todoItem, person);
 
         assertEquals("Buy groceries", task.getTodoItem().getTitle());
