@@ -16,7 +16,7 @@ public class AppUserTest {
     }
 
     @Test
-    @DisplayName("AppUser initialization")
+    @DisplayName("Test AppUser initialization")
     public void testAppUserInitialization() {
         assertNotNull(user);
         assertEquals("username", user.getUsername());
@@ -25,45 +25,45 @@ public class AppUserTest {
     }
 
     @Test
-    @DisplayName("setUsername with valid username")
+    @DisplayName("Test setUsername with valid username")
     public void testSetUsernameWithValidUsername() {
         user.setUsername("new_username");
         assertEquals("new_username", user.getUsername());
     }
 
     @Test
-    @DisplayName("setUsername with empty username")
+    @DisplayName("Test setUsername with empty username")
     public void testSetUsernameWithEmptyUsername() {
         assertThrows(IllegalArgumentException.class, () -> user.setUsername(""));
     }
 
     @Test
-    @DisplayName("setUsername with null username")
+    @DisplayName("Test setUsername with null username")
     public void testSetUsernameWithNullUsername() {
         assertThrows(IllegalArgumentException.class, () -> user.setUsername(null));
     }
 
     @Test
-    @DisplayName("setPassword with valid password")
+    @DisplayName("Test setPassword with valid password")
     public void testSetPasswordWithValidPassword() {
         user.setPassword("new_password");
         assertEquals("new_password", user.getPassword());
     }
 
     @Test
-    @DisplayName("setPassword with empty password")
+    @DisplayName("Test setPassword with empty password")
     public void testSetPasswordWithEmptyPassword() {
         assertThrows(IllegalArgumentException.class, () -> user.setPassword(""));
     }
 
     @Test
-    @DisplayName("setPassword with null password")
+    @DisplayName("Test setPassword with null password")
     public void testSetPasswordWithNullPassword() {
         assertThrows(IllegalArgumentException.class, () -> user.setPassword(null));
     }
 
     @Test
-    @DisplayName("setRole with valid role")
+    @DisplayName("Test setRole with valid role")
     public void testSetRoleWithValidRole() {
         user.setRole(AppRole.ROLE_APP_ADMIN);
         assertEquals(AppRole.ROLE_APP_ADMIN, user.getRole());
