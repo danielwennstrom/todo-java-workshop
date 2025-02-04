@@ -33,7 +33,7 @@ public class AppUser {
     }
 
     public void setPassword(String password) {
-        if (password == null | username.isEmpty())
+        if (password == null || password.isEmpty())
             throw new IllegalArgumentException("The password can't be empty or null.");
         this.password = password;
     }
